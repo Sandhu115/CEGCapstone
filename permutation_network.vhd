@@ -2,41 +2,25 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity permutation_network is
-    port( logical_address : in STD_LOGIC_VECTOR(31 downto 0);
-        clk, rst, churn : in STD_LOGIC;
+    port( 
+        logical_address  : in  STD_LOGIC_VECTOR(31 downto 0);
+        key              : in  STD_LOGIC_VECTOR(55 downto 0);
         physical_address : out STD_LOGIC_VECTOR(31 downto 0)
     );
 end entity permutation_network;
 
 architecture dflt of permutation_network is
     signal stage_0, stage_1, stage_2, stage_3, stage_4, stage_5, stage_6, stage_7 : STD_LOGIC_VECTOR(15 downto 0);
-    signal key : STD_LOGIC_VECTOR(55 downto 0); 
-    component trng_sim_model
-            port( clk      : in  std_logic;
-        rst_n    : in  std_logic;
-        req      : in  std_logic;                    -- Trigger a new random key
-        valid    : out std_logic;
-        rand_key : out std_logic_vector(55 downto 0) -- 56-bit switch vector
 
-            );
-        end component trng_sim_model;
+    component switch
+        port( 
+            x   : in  STD_LOGIC_VECTOR(1 downto 0);
+            sel : in  STD_LOGIC;
+            y   : out STD_LOGIC_VECTOR(1 downto 0)
+        );
+    end component switch;
 
-        component switch
-            port( x : in STD_LOGIC_VECTOR(1 downto 0);
-                sel : in STD_LOGIC;
-                y : out STD_LOGIC_VECTOR(1 downto 0)
-            );
-        end component switch;
-    begin
-        
-        rng : trng_sim_model
-            port map(
-                clk => clk,
-                rst_n => rst,
-                req => churn,
-                valid => open,
-                rand_key => key
-            );
+begin
 
     gen_stage_0: for i in 0 to 7 generate
         sw_inst: switch
@@ -127,6 +111,6 @@ architecture dflt of permutation_network is
 
     physical_address(31 downto 24) <= logical_address(31 downto 24);
     physical_address(23 downto 8)  <= stage_7;
-    physical_address(7 downto 0) <= logical_address(7 downto 0);
+    physical_address(7 downto 0)   <= logical_address(7 downto 0);
 
-    end architecture dflt;
+end architecture dflt;
