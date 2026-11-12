@@ -1,4 +1,10 @@
 v 4
+file . "behavioral_ram_tb.vhd" "f4aa6f53ed0b38562bdd33c3ea1f5e7937c6289d" "20261112164328.673":
+  entity behavioral_ram_tb at 1( 0) + 0 on 83;
+  architecture sim of behavioral_ram_tb at 8( 136) + 0 on 84;
+file . "behavioral_ram.vhd" "3508d43e158d18ec31e7bf7db659a28477b5a3a9" "20261112164328.668":
+  entity behavioral_ram at 1( 0) + 0 on 81;
+  architecture behavioral of behavioral_ram at 26( 1017) + 0 on 82;
 file . "permutation_network.vhd" "8c2dc1f9e4aa82adee210beb692d2452458beb06" "20261018201333.106":
   entity permutation_network at 1( 0) + 0 on 77;
   architecture dflt of permutation_network at 11( 287) + 0 on 78;
@@ -35,3 +41,6 @@ file . "quarter_round.vhd" "d0d4ff8cdfc60fde01337b78ddce3060a56729b4" "202610181
 file . "chacha20_structural_top.vhd" "ad00c6e8fd0c90e30db7bd16d1e19fd34123a01e" "20261018162252.899":
   entity chacha20_structural_top at 1( 0) + 0 on 59;
   architecture struct of chacha20_structural_top at 19( 609) + 0 on 60;
+file . "double_permutation_network.vhd" "5ba6e6876cca78422c017f58e3e14d84f1b0b38f" "20261106190907.389":
+  entity double_permutation_network at 1( 0) + 0 on 79;
+  architecture dflt of double_permutation_network at 14( 384) + 0 on 80;
